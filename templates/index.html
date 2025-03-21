@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1b1b2f, #162447);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: #d1d1d1;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background: #1f4068;
+            border-radius: 15px;
+            width: 80%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #e43f5a;
+        }
+        select, button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        select {
+            background-color: #1b1b2f;
+            color: #d1d1d1;
+        }
+        button {
+            background-color: #e43f5a;
+            color: white;
+        }
+        button:hover {
+            background-color: #9a2e42;
+        }
+        .movies {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .movie-item {
+            margin: 15px;
+            padding: 10px;
+            background: #162447;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        .movie-item:hover {
+            transform: scale(1.05);
+        }
+        img {
+            border-radius: 10px;
+            height: 300px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Movie Recommender System</h1>
+
+        <form method="POST">
+            <select name="movie_name">
+                {% for movie in movies %}
+                    <option value="{{ movie }}">{{ movie }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">🎬 Recommend</button>
+        </form>
+
+        {% if recommended_movies and recommended_posters %}
+            <div class="movies">
+                {% for movie, poster in zip(recommended_movies, recommended_posters) %}
+                    <div class="movie-item">
+                        <h3>{{ movie }}</h3>
+                        <img src="{{ poster }}" alt="{{ movie }} Poster">
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
